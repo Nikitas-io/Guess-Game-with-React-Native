@@ -5,15 +5,17 @@ import { StyleSheet } from 'react-native';
 function StartGameScreen () {
     return (
         <View style={styles.inputContainer}>
-            <TextInput 
-                style={styles.numberInput} 
-                maxLength={2} 
-                keyboardType="number-pad"  
+            <TextInput
+                style={styles.numberInput}
+                maxLength={2}
+                keyboardType="number-pad"
                 autoCapitalize="none"
                 autoCorrect={false}
             />
-            <PrimaryButton>Reset</PrimaryButton>
-            <PrimaryButton>Confirm</PrimaryButton>
+            <View style={styles.buttonContainer}>
+                <PrimaryButton>Reset</PrimaryButton>
+                <PrimaryButton>Confirm</PrimaryButton>
+            </View>
         </View>
     )
 }
@@ -49,5 +51,8 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         fontWeight: "bold",
         textAlign: "center"
+    },
+    buttonContainer: {
+        flexDirection: "row"
     }
 })
