@@ -2,11 +2,13 @@ import {View, TextInput, Alert} from 'react-native'
 import PrimaryButton from '../components/PrimaryButton';
 import { StyleSheet } from 'react-native';
 import { useState } from 'react';
+import Colors from '../util/colors';
 
-function StartGameScreen () {
+function StartGameScreen ({onConfirmNumber}) {
     const [enteredNumber, setEnteredNumber] = useState('');
 
     function numberInputHandler(enteredText) {
+        console.log('The entered text: ', enteredText);
         setEnteredNumber(enteredText);
     }
 
@@ -15,8 +17,12 @@ function StartGameScreen () {
     }
 
     function confirmInputHandler() {
+        console.log('The chosen text: ', enteredNumber);
         // Try to convert the text to a number.
         const chosenNumber = parseInt(enteredNumber);
+
+        console.log('The chosen number: ', chosenNumber);
+
         // Check if the chosen input is actually a double digit positive number.
         if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
             // Show alert.
@@ -30,7 +36,7 @@ function StartGameScreen () {
             return;
         }
 
-        console.log('The number is valid if you reach this point.')
+        onConfirmNumber(enteredNumber);
     }
 
     return (
@@ -41,7 +47,7 @@ function StartGameScreen () {
                 keyboardType="number-pad"
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChange={numberInputHandler}
+                onChangeText={numberInputHandler}
                 value={enteredNumber}
             />
             <View style={styles.buttonContainer}>
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 24,
         padding: 16,
         borderRadius: 8,
-        backgroundColor: "#4b0920",
+        backgroundColor: Colors.darkRed,
         // Android shadow
         elevation: 8,
         // iOS shadow
@@ -77,9 +83,9 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
         fontSize: 32,
-        borderBottomColor: "#ddb52f",
+        borderBottomColor: Colors.yellow,
         borderBottomWidth: 2,
-        color: "#ddb52f",
+        color: Colors.yellow,
         marginVertical: 8,
         fontWeight: "bold",
         textAlign: "center"
