@@ -8,7 +8,6 @@ function StartGameScreen ({onConfirmNumber}) {
     const [enteredNumber, setEnteredNumber] = useState('');
 
     function numberInputHandler(enteredText) {
-        console.log('The entered text: ', enteredText);
         setEnteredNumber(enteredText);
     }
 
@@ -20,8 +19,6 @@ function StartGameScreen ({onConfirmNumber}) {
         console.log('The chosen text: ', enteredNumber);
         // Try to convert the text to a number.
         const chosenNumber = parseInt(enteredNumber);
-
-        console.log('The chosen number: ', chosenNumber);
 
         // Check if the chosen input is actually a double digit positive number.
         if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
