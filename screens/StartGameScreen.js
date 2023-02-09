@@ -48,7 +48,7 @@ function StartGameScreen ({onConfirmNumber}) {
                 value={enteredNumber}
             />
             <View style={styles.buttonContainer}>
-                <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+                <PrimaryButton buttonPressed={resetInputHandler}>Reset</PrimaryButton>
                 <PrimaryButton buttonPressed={confirmInputHandler}>Confirm</PrimaryButton>
             </View>
         </View>

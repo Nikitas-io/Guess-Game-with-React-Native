@@ -3,7 +3,6 @@ import Colors from "../../util/colors";
 
 function PrimaryButton ({children, buttonPressed}) {
 
-
     return (
         <View style={styles.buttonOuterContainer}>
             <Pressable 
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
         borderRadius: 28,
         margin: 4,
         overflow: "hidden",
-        flex: 1  
+        flex: 1
     }, 
     buttonInnerContainer: {
         backgroundColor: Colors.red,

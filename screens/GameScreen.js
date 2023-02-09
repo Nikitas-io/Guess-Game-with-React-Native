@@ -39,7 +39,7 @@ function GameScreen({userNumber}) {
             ||
             (direction === 'greater' && currentGuess > userNumber)
         ) {
-            Alert.alert('Don\'t lie!', 'You know what you are doing...', {text: 'Sorry...', style: 'cancel'});
+            Alert.alert('Don\'t lie!', 'You know what you are doing...', [{text: 'Sorry...', style: 'cancel'}]);
             return;
         }
 
@@ -66,8 +66,8 @@ function GameScreen({userNumber}) {
         <View style={styles.newGuess}>
             <Text>Higher or lower?</Text>
             <View style={styles.buttonContainer}>
-                <PrimaryButton onPress={newGuessHandler} >-</PrimaryButton>
-                <PrimaryButton onPress={newGuessHandler} >+</PrimaryButton>
+                <PrimaryButton buttonPressed={newGuessHandler.bind(this, 'lower')} >-</PrimaryButton>
+                <PrimaryButton buttonPressed={newGuessHandler.bind(this, 'greater')} >+</PrimaryButton>
             </View>
         </View>
         {/* <View>LOG ROUNDS</View> */}
