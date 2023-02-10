@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {Text, View, StyleSheet, Alert } from 'react-native';
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
@@ -20,11 +20,26 @@ function generateRandomBetween(min, max, exclude) {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-function GameScreen({userNumber}) {
+function GameScreen({userNumber, onGameOver}) {
     // Generate the initial guess (and do not include the seleced user number).
-    const initialGuess = generateRandomBetween(minBoundary, maxBoundary, userNumber)
+    const initialGuess = generateRandomBetween(1, 100, userNumber);
     // Set the initial guess as the current guess state.
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+
+    // Check if there are updates to the state
+    useEffect(() => {
+
+        console.log('The current guess: ', currentGuess);
+        console.log('The user\'s number: ', userNumber);
+
+        // Check if the system has guessed the user number correctly.
+        if(currentGuess == userNumber) {
+            console.log('THE GAME SHOULD BE OVER!');
+            // The game is over, so show the appropriate screen.
+            onGameOver();
+        }
+    }, [currentGuess, userNumber, onGameOver]);
 
     /**
      * 
@@ -35,7 +50,7 @@ function GameScreen({userNumber}) {
         
         // Check if the dirrection given is a lie.
         if(
-            (direction === 'lower' && currentGuess < userNumber)
+            (direction === 'lower' && currentGuess < userNumber) 
             ||
             (direction === 'greater' && currentGuess > userNumber)
         ) {
