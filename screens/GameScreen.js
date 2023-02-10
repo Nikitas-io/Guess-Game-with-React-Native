@@ -1,9 +1,11 @@
 
 import { useEffect, useState } from 'react';
-import {Text, View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
+import Card from '../components/ui/Card';
+import InstructionText from '../components/ui/InstructionText';
 
 function generateRandomBetween(min, max, exclude) {
     // Generate a random number between the min and max values.
@@ -73,33 +75,34 @@ function GameScreen({userNumber, onGameOver}) {
     }
 
 
-    return <View style={styles.screen}>
-        <Title>Opponent's Guess</Title>
-        {/* GUESS */}
-        <NumberContainer>{currentGuess}</NumberContainer>
-        
-        <View style={styles.newGuess}>
-            <Text>Higher or lower?</Text>
-            <View style={styles.buttonContainer}>
-                <PrimaryButton buttonPressed={newGuessHandler.bind(this, 'lower')} >-</PrimaryButton>
-                <PrimaryButton buttonPressed={newGuessHandler.bind(this, 'greater')} >+</PrimaryButton>
-            </View>
+    return (
+        <View style={styles.rootContainer}>
+            <Title>Opponent's Guess</Title>
+            {/* GUESS */}
+
+            <NumberContainer>{currentGuess}</NumberContainer>
+            
+            <Card>
+                <InstructionText>Higher or lower?</InstructionText>
+                <View style={styles.buttonContainer}>
+                    <PrimaryButton buttonPressed={newGuessHandler.bind(this, 'lower')} >-</PrimaryButton>
+                    <PrimaryButton buttonPressed={newGuessHandler.bind(this, 'greater')} >+</PrimaryButton>
+                </View>
+            </Card>
+            {/* <View>LOG ROUNDS</View> */}
         </View>
-        {/* <View>LOG ROUNDS</View> */}
-    </View>
+    )
 }
 
 export default GameScreen;
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        padding: 24
+    rootContainer: {
+        flex: 1, 
+        marginTop: 50,
+        marginHorizontal: 24,
     },
     buttonContainer: {
         flexDirection: "row"
-    },
-    newGuess: {
-        alignItems: 'center'
     }
 })
