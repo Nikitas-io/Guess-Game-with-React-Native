@@ -8,6 +8,7 @@ export default InstructionText;
 
 styles = StyleSheet.create({
     textInstruction: {
+        fontFamily: 'open-sans',
         color: "white",
         fontSize: 20
     }

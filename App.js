@@ -32,7 +32,7 @@ export default function App() {
         });
         // Artificially delay for two seconds to simulate a slow loading
         // experience.
-        // await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -72,7 +72,9 @@ export default function App() {
     setGameIsOver(true);
   }
 
+  
   let screen = <StartGameScreen onConfirmNumber={pickedNumberHandler} />;
+
 
   if(userNumber) {
     screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>;
