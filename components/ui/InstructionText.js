@@ -1,15 +1,15 @@
 import { Text, StyleSheet } from 'react-native';
 
 function InstructionText({children, extraStyles}) {
-    return <Text style={[styles.textInstruction, extraStyles]}>{children}</Text>
+    return (<Text style={[styles.textInstructions, extraStyles]}>{children}</Text>);
 }
 
 export default InstructionText;
 
-styles = StyleSheet.create({
-    textInstruction: {
+const styles = StyleSheet.create({
+    textInstructions: {
         fontFamily: 'open-sans',
+        fontSize: 20,
         color: "white",
-        fontSize: 20
     }
 })

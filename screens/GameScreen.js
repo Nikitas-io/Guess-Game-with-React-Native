@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, Text } from 'react-native';
+import { View, StyleSheet, Alert, Text, FlatList } from 'react-native';
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/InstructionText';
 import { Ionicons } from '@expo/vector-icons';
+import GuessLogItem from '../components/game/GuessLog';
 
 function generateRandomBetween(min, max, exclude) {
     // Generate a random number between the min and max values.
@@ -38,7 +39,7 @@ function GameScreen({userNumber, onGameOver}) {
         // Check if the system has guessed the user number correctly.
         if(currentGuess == userNumber) {
             // The game is over, so show the appropriate screen.
-            onGameOver();
+            onGameOver(guessRounds.length);
         }
     }, [currentGuess, userNumber, onGameOver]);
 
@@ -81,6 +82,9 @@ function GameScreen({userNumber, onGameOver}) {
         setGuessRounds(previousGuessRounds => [newRandomNumber, ...previousGuessRounds]);
     }
 
+    // This constant is re-calculated every time the component is re-evaluated, which will happen
+    // every time a new round is added.
+    const guessRoundsListLength = guessRounds.length;
 
     return (
         <View style={styles.rootContainer}>
@@ -100,7 +104,13 @@ function GameScreen({userNumber, onGameOver}) {
                     </PrimaryButton>
                 </View>
             </Card>
-            <View>{guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)}</View>
+            <View style={styles.listContainer}>
+                <FlatList 
+                    data={guessRounds} 
+                    renderItem={(data) => <GuessLogItem roundNumber={guessRoundsListLength - data.index} guess={data.item} /> }
+                    keyExtractor={(item) => item}
+                />
+            </View>
         </View>
     )
 }
@@ -118,6 +128,9 @@ const styles = StyleSheet.create({
     },
     textInstructions: {
         marginBottom: 10
+    },
+    listContainer: {
+        flex: 1
     }
 
 })

@@ -70,8 +70,9 @@ export default function App() {
     setGameIsOver(false);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(numberOfRounds) {
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
   }
 
   function startNewGameHandler() {
@@ -88,7 +89,7 @@ export default function App() {
   }
 
   if(gameIsOver && userNumber) {
-    screen = <GameOverScreen userNumber={userNumber} guessNumber={guessRound} onGameOver={startNewGameHandler}/>
+    screen = <GameOverScreen roundsNumber={guessRound} userNumber={userNumber} onStartNewGame={startNewGameHandler}/>
   }
 
   

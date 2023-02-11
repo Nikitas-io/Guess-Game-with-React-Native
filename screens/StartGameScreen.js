@@ -1,3 +1,4 @@
+import InstructionText from '../components/ui/InstructionText';
 import {View, TextInput, Alert} from 'react-native'
 import PrimaryButton from '../components/ui/PrimaryButton';
 import { StyleSheet } from 'react-native';
@@ -5,7 +6,6 @@ import { useState } from 'react';
 import Colors from '../util/colors';
 import Title from '../components/ui/Title';
 import Card from '../components/ui/Card';
-import InstructionText from '../components/ui/InstructionText';
 
 function StartGameScreen ({onConfirmNumber}) {
     const [enteredNumber, setEnteredNumber] = useState('');
