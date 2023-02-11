@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     buttonOuterContainer: {
         borderRadius: 28,
         margin: 4,
+        flex: 1,
         overflow: "hidden",
-        flex: 1
     }, 
     buttonInnerContainer: {
         backgroundColor: Colors.red,
@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
     },
     buttonText:{ 
         color: "white",
-        textAlign: "center"
+        textAlign: "center",
+        fontSize: 18,
+        fontFamily: "open-sans"
     },
     pressed: {
         opacity: 0.75
