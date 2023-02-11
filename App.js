@@ -18,6 +18,8 @@ export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   // State to determine if the game over screen should be shown
   const [gameIsOver, setGameIsOver] = useState(true);
+  // State to determine the guessing round.
+  const [guessRound, setGuessRounds] = useState(0)
 
   // The state that determines if the loading screen should be shown.
   const [appIsReady, setAppIsReady] = useState(false);
@@ -72,6 +74,11 @@ export default function App() {
     setGameIsOver(true);
   }
 
+  function startNewGameHandler() {
+    setUserNumber(null);
+    setGuessRounds(0)
+  }
+
   
   let screen = <StartGameScreen onConfirmNumber={pickedNumberHandler} />;
 
@@ -81,7 +88,7 @@ export default function App() {
   }
 
   if(gameIsOver && userNumber) {
-    screen = <GameOverScreen />
+    screen = <GameOverScreen userNumber={userNumber} guessNumber={guessRound} onGameOver={startNewGameHandler}/>
   }
 
   

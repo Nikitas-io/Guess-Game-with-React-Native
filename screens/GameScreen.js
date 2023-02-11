@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert, Text } from 'react-native';
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -20,6 +20,8 @@ function generateRandomBetween(min, max, exclude) {
     }
 }
 
+// These variables need to be independent of the GameScreen component function,
+// so that they are not reset every time the GameScreen re-executed.
 let minBoundary = 1;
 let maxBoundary = 100;
 
@@ -28,29 +30,30 @@ function GameScreen({userNumber, onGameOver}) {
     const initialGuess = generateRandomBetween(1, 100, userNumber);
     // Set the initial guess as the current guess state.
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    // The guess rounds state.
+    const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
-
-    // Check if there are updates to the state
+    // Check if there are updates to the currentGuess state.
     useEffect(() => {
-
-        console.log('The current guess: ', currentGuess);
-        console.log('The user\'s number: ', userNumber);
-
         // Check if the system has guessed the user number correctly.
         if(currentGuess == userNumber) {
-            console.log('THE GAME SHOULD BE OVER!');
             // The game is over, so show the appropriate screen.
             onGameOver();
         }
     }, [currentGuess, userNumber, onGameOver]);
+
+    // Check if the component became part of the rendered user interface.
+    useEffect(() => {
+        // Reset the min & max boundaries to their initial values.
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
 
     /**
      * 
      * @param {*} direction the direction has a value of either 'lower' or 'greater'
      */
     function newGuessHandler(direction) {
-        console.log('The direction: ', direction);
-        
         // Check if the dirrection given is a lie.
         if(
             (direction === 'lower' && currentGuess < userNumber) 
@@ -72,7 +75,10 @@ function GameScreen({userNumber, onGameOver}) {
         }
         // Generate a new random number within the allowed boundaries.
         const newRandomNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
-        setCurrentGuess(newRandomNumber)
+        // Set the current guess to the generated random number.
+        setCurrentGuess(newRandomNumber);
+        // Add the new random number to the guesses array.
+        setGuessRounds(previousGuessRounds => [newRandomNumber, ...previousGuessRounds]);
     }
 
 
@@ -94,7 +100,7 @@ function GameScreen({userNumber, onGameOver}) {
                     </PrimaryButton>
                 </View>
             </Card>
-            {/* <View>LOG ROUNDS</View> */}
+            <View>{guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)}</View>
         </View>
     )
 }
