@@ -1,9 +1,25 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, useWindowDimensions} from 'react-native';
 import Colors from '../../util/colors';
 
 function NumberContainer({children}){
+    // Get the width and height of the device dynamically.
+    const {width} = useWindowDimensions();
+    // Set the styles dynamically.
+    let dynamicContainer;
+    if(width < 380) {
+        dynamicContainer = {
+            marginHorizontal: 0,
+            marginTop: 29
+        }
+    } else {
+        dynamicContainer = {
+            marginHorizontal: 20,
+            marginVertical: 30
+        }
+    }
+
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, dynamicContainer]}>
             <Text style={styles.numberText}>{children}</Text>
         </View>
     )
@@ -17,7 +33,6 @@ const styles = StyleSheet.create({
         padding: 24, 
         borderColor: Colors.darkRed,
         borderRadius: 8,
-        marginTop: 30,
         alignItems: "center",
         justifyContent: "center"
     },
