@@ -14,8 +14,8 @@ export default NumberContainer;
 const styles = StyleSheet.create({
     container: {
         borderWidth: 4, 
-        borderColor: Colors.darkRed,
         padding: 24, 
+        borderColor: Colors.darkRed,
         borderRadius: 8,
         marginTop: 30,
         alignItems: "center",

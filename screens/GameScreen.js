@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     listContainer: {
-        flex: 1
+        flex: 1,
+        marginVertical: 7
     }
 
 })
