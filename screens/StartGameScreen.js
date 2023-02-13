@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
         flex: 1, 
         marginHorizontal: 24,
     },
-    
     numberInput: {
         height: 50,
         width: 50,

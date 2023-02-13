@@ -51,9 +51,10 @@ export default GameOverScreen;
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1
+        flex: 1,
     },
     rootContainer: {
+        marginTop: 20,
         flex: 1,
         padding: 24,
         justifyContent: "center", // Align content to the center of the Y axis.
